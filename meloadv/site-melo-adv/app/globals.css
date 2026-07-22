@@ -1,0 +1,302 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* ----- MELO ADVOGADOS · Premium Brand Palette (LIGHT MODE) -----
+     #F3F1EC  ink            (Background / Light Cream)
+     #FFFFFF  smoke          (Surface / White)
+     #D4AF37  gold           (Primary luxury gold accent)
+     #C5A028  gold-hover     (Hover / secondary accent)
+     #8C6239  bronze         (Warm secondary brown/bronze)
+     #0B0E14  bone           (Base Text / Dark Ink)
+     #161B25  cream          (Inverted surfaces)
+  */
+  --color-ink: #F3F1EC;
+  --color-smoke: #FFFFFF;
+  --color-gold: #D4AF37;
+  --color-gold-hover: #C5A028;
+  --color-bronze: #8C6239;
+  --color-bone: #0B0E14;
+  --color-cream: #161B25;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Inter Tight", "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --animate-marquee: marquee linear infinite;
+  --animate-marquee-reverse: marquee-reverse linear infinite;
+  --animate-float: float 8s ease-in-out infinite;
+
+  @keyframes marquee {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+  }
+  @keyframes marquee-reverse {
+    0% { transform: translate3d(-50%, 0, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(1.5deg); }
+  }
+}
+
+@layer base {
+  :root {
+    --cursor-x: 50vw;
+    --cursor-y: 50vh;
+  }
+
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body {
+    background: var(--color-ink);
+    color: var(--color-bone);
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display), ui-serif, Georgia, serif;
+  font-feature-settings: "ss01", "ss02";
+  letter-spacing: -0.03em;
+}
+
+@utility font-mono {
+  font-family: var(--font-mono), ui-monospace, "JetBrains Mono", monospace;
+}
+
+
+
+/* ============ NOISE / GRAIN OVERLAY ============ */
+.grain {
+  position: fixed;
+  inset: -200%;
+  width: 500%;
+  height: 500%;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.4 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 60;
+  animation: grain 8s steps(6) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0); }
+  70% { transform: translate(0, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+/* ============ CUSTOM CURSOR ============ */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 100;
+  mix-blend-mode: difference;
+  will-change: transform;
+  transform: translate3d(var(--cursor-x), var(--cursor-y), 0) translate(-50%, -50%);
+}
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 999px;
+  transition: width 0.25s ease, height 0.25s ease, background 0.25s ease;
+}
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 999px;
+  transition: width 0.3s cubic-bezier(.2,.8,.2,1), height 0.3s cubic-bezier(.2,.8,.2,1), background 0.3s ease, border-color 0.3s ease;
+}
+body.cursor-hovering .cursor-dot {
+  width: 0;
+  height: 0;
+}
+body.cursor-hovering .cursor-ring {
+  width: 64px;
+  height: 64px;
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
+
+/* ============ DOTTED / GRID / DIAGONAL PATTERNS ============ */
+.pattern-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+.pattern-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* ============ MOTION / REVEALS ============ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s cubic-bezier(.2,.8,.2,1), transform 1.2s cubic-bezier(.2,.8,.2,1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s cubic-bezier(.2,.8,.2,1);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.cta-arrow {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  line-height: 0;
+  vertical-align: middle;
+  transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
+}
+.cta-arrow-centered {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+a:hover .cta-arrow,
+button:hover .cta-arrow {
+  transform: translate(3px, -3px);
+}
+
+/* ============ AWWWARDS TIMELINE STYLES ============ */
+.bg-giant-year {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: clamp(20rem, 40vw, 50rem);
+  font-weight: 600;
+  color: var(--color-gold);
+  opacity: 0.04;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1; /* behind orbit (z-index 2) */
+  line-height: 1;
+  letter-spacing: -0.05em;
+  will-change: transform;
+}
+
+/* Light Sweep Shader/CSS on the active visual */
+.timeline-3d-visual {
+  overflow: hidden; /* Ensure sweep doesn't go outside the border */
+}
+
+/* Base state for sweep */
+.timeline-3d-visual::after {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 60deg,
+    rgba(255, 255, 255, 0.8) 120deg,
+    rgba(212, 175, 55, 1) 150deg,
+    rgba(255, 255, 255, 0.8) 180deg,
+    transparent 240deg,
+    transparent 360deg
+  );
+  opacity: 0;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+/* Active state for sweep */
+.timeline-3d-card.active .timeline-3d-visual::after {
+  opacity: 1;
+  animation: light-sweep 4s linear infinite;
+}
+
+@keyframes light-sweep {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Enhanced shadow for active */
+.timeline-3d-card.active .timeline-3d-visual {
+  box-shadow:
+    0 40px 120px rgba(212, 175, 55, 0.15),
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(212, 175, 55, 0.6);
+  border-color: rgba(212, 175, 55, 0.8);
+  transition: box-shadow 0.6s ease, border-color 0.6s ease;
+}
+
+/* Background image mouse parallax reset and prep */
+.window-parallax-img {
+  will-change: transform;
+  transform: translate(calc(var(--mouse-x, 0) * -15px), calc(var(--mouse-y, 0) * -15px)) scale(1.15);
+  transition: transform 0.1s ease-out; /* fallback if JS quickTo is not used, but quickTo handles it */
+}
+
+

@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+/* =========================================================================
+   do.thus — Inteligência em Gestão
+   Sistema de marca. Dark cinematográfico com respiro (Apple-style).
+   Regra 60-30-10: fundo/estrutura dominam, Azul Elétrico só em ação.
+   Ponto da logo = #00D2FF, sempre. Nunca preto puro.
+   ========================================================================= */
+@theme {
+  /* --- Núcleo institucional --- */
+  --color-carbon: #0b192c;        /* Azul Carbono — peso institucional */
+  --color-abyss: #050c16;         /* Azul Absoluto — dark mode base */
+  --color-abyss-2: #030812;       /* profundidade extra */
+  --color-graphite: #2a3647;      /* Cinza Grafite Tech — texto sobre claro */
+  --color-structure: #f4f6f9;     /* Cinza Estrutura — superfícies claras */
+  --color-snow: #ffffff;          /* Branco Neve */
+
+  /* --- Superfícies dark (derivadas do carbono) --- */
+  --color-surface: #0a1728;       /* card sobre fundo escuro */
+  --color-surface-2: #0e2038;     /* card elevado */
+  --color-line: #17293f;          /* hairline sobre escuro */
+  --color-line-soft: #10203a;
+
+  /* --- Texto sobre escuro --- */
+  --color-text: #eaf2fb;          /* primário */
+  --color-text-dim: #93a6bd;      /* secundário */
+  --color-text-faint: #5c6f88;    /* terciário / captions */
+
+  /* --- Acento (10%) --- */
+  --color-electric: #00d2ff;      /* Azul Elétrico — CTA / keyword / o ponto */
+  --color-electric-soft: #5fe4ff;
+  --color-electric-deep: #00a6cc;
+
+  /* --- Tipografia --- */
+  --font-display: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sans-body), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-editorial), ui-serif, Georgia, serif;
+
+  /* --- Motion tokens --- */
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-float: float 10s ease-in-out infinite;
+  --animate-pulse-dot: pulseDot 2.4s ease-in-out infinite;
+  --animate-spin-slow: spin 26s linear infinite;
+
+  @keyframes marquee {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-16px); }
+  }
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+}
+
+@layer base {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  html {
+    color-scheme: dark;
+    -webkit-tap-highlight-color: transparent;
+  }
+  html, body {
+    background: var(--color-abyss);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    overflow-x: clip;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--color-electric) 30%, transparent);
+    color: var(--color-snow);
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  /* Respeita quem prefere menos movimento */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Container com respiro Apple */
+  .container-do {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+  }
+
+  /* Texto editorial serif itálico — as "keywords" do deck */
+  .editorial {
+    font-family: var(--font-serif);
+    font-style: italic;
+    letter-spacing: -0.01em;
+  }
+
+  /* Palavra-chave em Azul Elétrico (uso restrito) */
+  .accent {
+    color: var(--color-electric);
+  }
+
+  /* Vidro sobre escuro */
+  .glass {
+    background: color-mix(in srgb, var(--color-surface) 70%, transparent);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid var(--color-line);
+  }
+
+  /* Borda gradiente sutil (destaque de card) */
+  .ring-glow {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--color-electric) 22%, transparent),
+      0 24px 70px -30px color-mix(in srgb, var(--color-electric) 45%, transparent);
+  }
+
+  /* Fade de máscara nas bordas (marquee de clientes) */
+  .mask-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  /* Grid de pontos — assinatura visual da do.thus (o "ponto") */
+  .dot-grid {
+    background-image: radial-gradient(
+      color-mix(in srgb, var(--color-electric) 35%, transparent) 1px,
+      transparent 1.4px
+    );
+    background-size: 26px 26px;
+  }
+
+  /* Glow radial de fundo */
+  .aura {
+    background: radial-gradient(
+      60% 60% at 50% 40%,
+      color-mix(in srgb, var(--color-electric) 16%, transparent) 0%,
+      transparent 70%
+    );
+  }
+
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  /* Tela cheia com respiro — uma ideia por seção (ritmo Apple) */
+  .screen {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Halo luminoso grande e suave atrás de um elemento */
+  .halo {
+    background: radial-gradient(
+      closest-side,
+      color-mix(in srgb, var(--color-electric) 30%, transparent),
+      transparent 78%
+    );
+    filter: blur(30px);
+  }
+
+  /* Esconde a barra de scroll horizontal em trilhos pinned */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Tipo gigante e silencioso */
+  .display-xl {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 0.94;
+  }
+}

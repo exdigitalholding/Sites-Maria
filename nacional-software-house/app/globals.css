@@ -1,0 +1,282 @@
+@import "tailwindcss";
+
+/* =========================================================================
+   NACIONAL SOFTWARE HOUSE - Dark Tech Brand System
+   Locked dark theme (white logo needs a dark canvas).
+   Primary accent: emerald green (from logo #00A030, refined).
+   Secondary accent: gold (from logo #F0C030), used sparingly.
+   ========================================================================= */
+@theme {
+  --color-ink: #05070a;          /* page background, cool near-black */
+  --color-ink-2: #080b10;        /* alt background band */
+  --color-surface: #0c1017;      /* raised surface */
+  --color-surface-2: #12171f;    /* card surface */
+  --color-line: #1c232e;         /* hairline borders */
+
+  --color-text: #e8edf3;         /* primary text */
+  --color-text-dim: #8a96a6;     /* secondary text */
+  --color-text-faint: #5b6675;   /* tertiary / captions */
+
+  --color-green: #12b76a;        /* PRIMARY accent */
+  --color-green-bright: #26e08a; /* hover / glow */
+  --color-green-deep: #0a7d47;   /* pressed / deep */
+  --color-gold: #f5b921;         /* SECONDARY accent (sparingly) */
+  --color-gold-soft: #ffd45e;
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-float: float 9s ease-in-out infinite;
+  --animate-spin-slow: spin 22s linear infinite;
+
+  @keyframes marquee {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-18px) rotate(1deg); }
+  }
+}
+
+@layer base {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+  html, body {
+    background: var(--color-ink);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--color-green);
+    color: #04120b;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+  }
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--color-ink); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-line);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #2a3441; }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+}
+@utility font-mono {
+  font-family: var(--font-mono);
+}
+
+/* ============ FILM GRAIN (fixed, pointer-none, GPU-cheap) ============ */
+.grain {
+  position: fixed;
+  inset: -150%;
+  width: 400%;
+  height: 400%;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 70;
+  animation: grain 8s steps(6) infinite;
+}
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-8%, 4%); }
+  40% { transform: translate(6%, -10%); }
+  60% { transform: translate(-4%, 8%); }
+  80% { transform: translate(9%, 2%); }
+}
+
+/* ============ BACKGROUND PATTERNS ============ */
+.pattern-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
+}
+.pattern-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+/* ============ HERO FRAME SEQUENCE / NEON DEPTH ============ */
+.hero-sequence-visual {
+  isolation: isolate;
+  background: #05070a;
+}
+.hero-sequence-canvas {
+  filter: saturate(1.08) contrast(1.04);
+}
+.hero-image-gradient {
+  background: none;
+}
+.hero-neon-frame {
+  z-index: 2;
+  border: 1px solid rgba(38, 224, 138, 0.2);
+  border-radius: 26px;
+  box-shadow:
+    inset 0 0 34px rgba(18, 183, 106, 0.08),
+    0 0 28px rgba(18, 183, 106, 0.12),
+    0 24px 70px rgba(0, 0, 0, 0.48);
+  -webkit-mask-image: linear-gradient(90deg, transparent 3%, #000 38%, #000 97%);
+  mask-image: linear-gradient(90deg, transparent 3%, #000 38%, #000 97%);
+}
+.hero-neon-scan {
+  z-index: 1;
+  opacity: 0.22;
+  background:
+    linear-gradient(90deg, transparent 49.85%, rgba(38, 224, 138, 0.16) 50%, transparent 50.15%),
+    repeating-linear-gradient(0deg, transparent 0 5px, rgba(255, 255, 255, 0.014) 6px);
+  mix-blend-mode: screen;
+}
+.hero-sequence-visual::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 72% 55%, transparent 20%, rgba(5, 7, 10, 0.2) 52%, rgba(5, 7, 10, 0.76) 100%);
+  box-shadow: inset 0 -90px 100px rgba(5, 7, 10, 0.78);
+}
+
+/* ============ AURORA GLOW ORBS ============ */
+.aurora {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(90px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ============ SCROLL REVEAL ============ */
+.reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============ GRADIENT TEXT (green -> gold, used on accents only) ============ */
+.text-brand-gradient {
+  background: linear-gradient(100deg, var(--color-green-bright) 0%, var(--color-gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ============ SPOTLIGHT CARD (cursor-aware border glow) ============ */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    240px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(38, 224, 138, 0.55),
+    transparent 60%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.spotlight:hover::before { opacity: 1; }
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    300px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(38, 224, 138, 0.08),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+.spotlight:hover::after { opacity: 1; }
+
+/* ============ LINK UNDERLINE ============ */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ============ CTA ARROW ============ */
+.cta-arrow {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+a:hover .cta-arrow, button:hover .cta-arrow {
+  transform: translate(3px, -3px);
+}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .grain, .aurora { animation: none; }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-image-gradient {
+    background: linear-gradient(90deg, #05070a, rgba(5, 7, 10, 0.75) 50%, transparent);
+  }
+  .hero-sequence-canvas { filter: saturate(1.06) contrast(1.03); }
+  .hero-neon-frame {
+    border-radius: 18px;
+    -webkit-mask-image: linear-gradient(#000, #000);
+    mask-image: linear-gradient(#000, #000);
+  }
+  .hero-sequence-visual::after {
+    background: linear-gradient(to bottom, rgba(5, 7, 10, 0.18), transparent 38%, rgba(5, 7, 10, 0.84));
+  }
+}

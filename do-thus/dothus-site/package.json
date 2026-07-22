@@ -1,0 +1,36 @@
+{
+  "name": "dothus-site",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "validate": "npm run lint && npm run typecheck"
+  },
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "lenis": "^1.3.11",
+    "lucide-react": "^0.469.0",
+    "motion": "^12.23.0",
+    "next": "16.2.10",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.10",
+    "puppeteer-core": "^23.11.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
