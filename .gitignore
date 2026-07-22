@@ -1,5 +1,5 @@
 # Dependencies
-node_modules/
+**/node_modules/
 .pnp
 .pnp.js
 
@@ -7,10 +7,10 @@ node_modules/
 /coverage
 
 # Next.js / Build outputs
-/.next/
-/out/
-/build
-/dist
+**/.next/
+**/out/
+**/build
+**/dist
 
 # Misc
 .DS_Store
