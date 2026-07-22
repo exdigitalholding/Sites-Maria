@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python \"C:/Users/mayco/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"creative marketing agency awwwards award winning bold experimental editorial\" --design-system -p \"LIST Marketing\" -f markdown)",
+      "Bash(npm install *)",
+      "Bash(npx next *)",
+      "Bash(gh repo *)",
+      "WebFetch(domain:github.com)",
+      "Bash(stat -c '%y' ~/.claude/skills/ui-ux-pro-max/SKILL.md 2>/dev/null; wc -l ~/.claude/skills/ui-ux-pro-max/SKILL.md ~/.claude/skills/ui-ux-pro-max/data/*.csv 2>/dev/null | tail -20)",
+      "Read(//c/Users/mayco/OneDrive/Documentos/Projetos/List/**)",
+      "Bash(npm --version)",
+      "Bash(uipro --version)",
+      "Bash(uipro --help)",
+      "Bash(uipro init *)",
+      "Bash(uipro update *)",
+      "Bash(python \"C:/Users/mayco/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"marketing agency landing dark mode bold orange brutalist editorial\" --design-system -p \"List\")",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"http://localhost:3002/3\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"http://localhost:3002/4\")"
+    ]
+  }
+}
