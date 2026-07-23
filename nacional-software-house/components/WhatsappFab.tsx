@@ -20,7 +20,7 @@ export default function WhatsappFab() {
 
   return (
     <a
-      href={whatsappHref(wa.projeto)}
+      href={whatsappHref(wa.flutuante)}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Falar no WhatsApp"

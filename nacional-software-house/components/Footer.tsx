@@ -15,7 +15,7 @@ export default function Footer() {
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <a
-                href={whatsappHref(wa.projeto)}
+                href={whatsappHref(wa.rodape)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-green px-5 py-2.5 text-[13px] font-semibold text-[#04120b] transition-colors hover:bg-green-bright"

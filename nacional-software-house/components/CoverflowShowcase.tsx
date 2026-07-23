@@ -27,6 +27,8 @@ function CardFace({ i, member }: { i: number; member: (typeof team)[number] }) {
         <img
           src={member.image}
           alt={member.name}
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover"
         />
       ) : (

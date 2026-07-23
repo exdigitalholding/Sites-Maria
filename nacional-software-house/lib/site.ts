@@ -5,7 +5,7 @@ export const site = {
   name: "Nacional Software House",
   shortName: "Nacional",
   tagline: "Você imagina, a gente constrói.",
-  whatsapp: "5599999999999", // TODO: substituir pelo número real
+  whatsapp: "5541997819114",
   email: "contato@nacionalsoftware.com.br",
   priceFrom: "R$ 3.500",
   installments: "10x",
@@ -18,12 +18,24 @@ export function whatsappHref(message: string) {
 }
 
 export const wa = {
-  projeto:
-    "Olá! Vim pelo site da Nacional. Quero tirar minha ideia do papel e entender como funciona.",
-  proposta:
-    "Olá! Vim pelo site da Nacional. Quero receber uma proposta para o meu projeto.",
+  menu:
+    "Olá! Acessei o site da Nacional e cliquei no menu porque quero conversar sobre uma ideia de projeto.",
+  hero:
+    "Olá! Vi a apresentação da Nacional e quero tirar uma ideia do papel. Podemos conversar sobre o que preciso?",
+  ideia:
+    "Olá! Me interessei pela forma como a Nacional transforma ideias em produtos digitais. Quero contar a minha ideia e entender os próximos passos.",
+  orcamento:
+    "Olá! Vi a seção de investimento e quero solicitar um orçamento para meu projeto.",
   comecar:
-    "Olá! Quero começar meu projeto com a Nacional Software House.",
+    "Olá! Conheci a proposta da Nacional e quero começar meu projeto. Como seguimos?",
+  duvidas:
+    "Olá! Estou avaliando um projeto com a Nacional e gostaria de tirar algumas dúvidas antes de pedir um orçamento.",
+  rodape:
+    "Olá! Cheguei ao final do site da Nacional e gostaria de conversar sobre as soluções para o meu projeto.",
+  flutuante:
+    "Olá! Estou navegando no site da Nacional e preciso de ajuda para entender qual solução faz sentido para mim.",
+  mobile:
+    "Olá! Estou acessando o site da Nacional pelo celular e quero falar sobre um projeto.",
 };
 
 export const nav = [
@@ -81,56 +93,56 @@ export const team = [
     name: "Maria Eduarda",
     role: "Equipe Nacional",
     focus: "",
-    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    image: "/nosso-time/Maria.jpg",
     tint: "from-gold/20",
   },
   {
     name: "João Stel",
     role: "Equipe Nacional",
     focus: "",
-    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    image: "/nosso-time/joao.jpg",
     tint: "from-green/20",
   },
   {
     name: "Gabriel A.",
     role: "Equipe Nacional",
     focus: "",
-    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    image: "/nosso-time/gabriel.jpg",
     tint: "from-green/15",
   },
   {
     name: "Victor Ogawa",
     role: "Equipe Nacional",
     focus: "",
-    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    image: "/nosso-time/ogawa.jpg",
     tint: "from-gold/15",
   },
   {
     name: "Maycon Vasconcellos",
     role: "Equipe Nacional",
     focus: "",
-    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    image: "/nosso-time/maycon.jpg",
     tint: "from-green/20",
   },
   {
     name: "Alex Marin",
     role: "Equipe Nacional",
     focus: "",
-    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    image: "/nosso-time/alex.jpg",
     tint: "from-gold/20",
   },
   {
     name: "Mateus Arceno",
     role: "Equipe Nacional",
     focus: "",
-    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    image: "/nosso-time/mateus.jpg",
     tint: "from-green/15",
   },
   {
     name: "Otto Tomás",
     role: "Equipe Nacional",
     focus: "",
-    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    image: "/nosso-time/otto.jpg",
     tint: "from-gold/15",
   },
 ] as const;

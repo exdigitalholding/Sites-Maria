@@ -200,7 +200,7 @@ export default function HeroSequence() {
                 </p>
                 {i === 0 && (
                   <div className="mt-9 flex flex-wrap items-center gap-4">
-                    <CtaPrimary href={whatsappHref(wa.projeto)}>
+                    <CtaPrimary href={whatsappHref(wa.hero)}>
                       Tirar a ideia do papel
                     </CtaPrimary>
                     <CtaGhost href="#processo">Ver o processo</CtaGhost>

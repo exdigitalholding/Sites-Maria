@@ -10,7 +10,7 @@ export default function BottomNav() {
     { label: "Processo", href: "#processo", icon: Layers },
     {
       label: "Contato",
-      href: whatsappHref(wa.projeto),
+      href: whatsappHref(wa.mobile),
       icon: MessageCircle,
       external: true,
     },

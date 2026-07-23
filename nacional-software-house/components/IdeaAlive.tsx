@@ -43,7 +43,7 @@ export default function IdeaAlive() {
             profundidade e detalhe que a gente coloca em cada entrega.
           </p>
           <div className="reveal mt-8" data-delay="160">
-            <CtaPrimary href={whatsappHref(wa.projeto)}>
+            <CtaPrimary href={whatsappHref(wa.ideia)}>
               Tirar a ideia do papel
             </CtaPrimary>
           </div>

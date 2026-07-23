@@ -134,7 +134,7 @@ export function IdeaAliveV1() {
             {INTRO}
           </p>
           <div className="mt-8">
-            <CtaPrimary href={whatsappHref(wa.projeto)}>
+            <CtaPrimary href={whatsappHref(wa.ideia)}>
               Tirar a ideia do papel
             </CtaPrimary>
           </div>
@@ -199,7 +199,7 @@ export function IdeaAliveV2() {
             </div>
           </div>
           <div className="mt-8">
-            <CtaPrimary href={whatsappHref(wa.projeto)}>
+            <CtaPrimary href={whatsappHref(wa.ideia)}>
               Tirar a ideia do papel
             </CtaPrimary>
           </div>
@@ -276,7 +276,7 @@ export function IdeaAliveV3() {
             {INTRO}
           </p>
           <div className="mt-8">
-            <CtaPrimary href={whatsappHref(wa.projeto)}>
+            <CtaPrimary href={whatsappHref(wa.ideia)}>
               Tirar a ideia do papel
             </CtaPrimary>
           </div>

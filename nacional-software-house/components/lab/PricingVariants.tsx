@@ -136,7 +136,7 @@ function SpotlightCard({
       </div>
       <div className="relative mt-8 pt-2">
         <a
-          href={whatsappHref(wa.proposta)}
+          href={whatsappHref(wa.orcamento)}
           target="_blank"
           rel="noopener noreferrer"
           className={`inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-colors ${
@@ -225,7 +225,7 @@ export function PricingV2() {
                   </ul>
                   <div className="mt-8 pt-2">
                     <a
-                      href={whatsappHref(wa.proposta)}
+                      href={whatsappHref(wa.orcamento)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-colors ${
@@ -350,7 +350,7 @@ export function PricingV3() {
 
           <div className="mt-6 text-center">
             <a
-              href={whatsappHref(wa.proposta)}
+              href={whatsappHref(wa.orcamento)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-green px-8 py-3.5 text-sm font-semibold text-[#04120b] transition-colors hover:bg-green-bright"

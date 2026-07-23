@@ -91,7 +91,7 @@ export default function Pricing() {
 
         <div className="reveal mt-12 flex flex-col items-center gap-4" data-delay="150">
           <a
-            href={whatsappHref(wa.proposta)}
+            href={whatsappHref(wa.orcamento)}
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-green px-8 py-4 text-sm font-semibold text-[#04120b] shadow-[0_18px_50px_-14px_rgba(18,183,106,0.7)] transition-colors duration-300 hover:bg-green-bright"

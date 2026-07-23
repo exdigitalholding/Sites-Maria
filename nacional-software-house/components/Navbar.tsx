@@ -39,7 +39,7 @@ export default function Navbar() {
 
         <div className="hidden lg:block">
           <a
-            href={whatsappHref(wa.projeto)}
+            href={whatsappHref(wa.menu)}
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-2 rounded-full bg-green px-5 py-2.5 text-[12.5px] font-semibold text-[#04120b] transition-colors hover:bg-green-bright"

@@ -94,7 +94,7 @@ function Heading({ align = "left" }: { align?: "left" | "center" }) {
   );
 }
 
-function PrimaryCta({ children = CTA, msg = wa.proposta }: { children?: React.ReactNode; msg?: string }) {
+function PrimaryCta({ children = CTA, msg = wa.orcamento }: { children?: React.ReactNode; msg?: string }) {
   return (
     <a
       href={whatsappHref(msg)}
@@ -108,7 +108,7 @@ function PrimaryCta({ children = CTA, msg = wa.proposta }: { children?: React.Re
   );
 }
 
-function GhostCta({ children, msg = wa.projeto }: { children: React.ReactNode; msg?: string }) {
+function GhostCta({ children, msg = wa.duvidas }: { children: React.ReactNode; msg?: string }) {
   return (
     <a
       href={whatsappHref(msg)}
