@@ -20,12 +20,14 @@ const clamp = (v: number, min: number, max: number) =>
 
 // Visual compartilhado entre o coverflow 3D (desktop) e o slider (mobile).
 function CardFace({ i, member }: { i: number; member: (typeof team)[number] }) {
+  const image: string = member.image;
+
   return (
     <>
       {/* Foto da pessoa. Enquanto `image` estiver vazio, mostra o placeholder. */}
-      {member.image ? (
+      {image ? (
         <img
-          src={member.image}
+          src={image}
           alt={member.name}
           loading="lazy"
           decoding="async"

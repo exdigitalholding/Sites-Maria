@@ -144,10 +144,17 @@ export default function ZoomParallax() {
     return () => query.removeEventListener("change", syncPlaybackBudget);
   }, []);
 
-  const s1 = useTransform(scrollYProgress, [0, 1], [1, 3.8]);
-  const s2 = useTransform(scrollYProgress, [0, 1], [1, 4.5]);
-  const s3 = useTransform(scrollYProgress, [0, 1], [1, 5.2]);
-  const scales = [s1, s2, s3, s2, s3, s2];
+  const centerScale = useTransform(scrollYProgress, [0, 1], [1, 4]);
+  const nearScale = useTransform(scrollYProgress, [0, 1], [1, 5]);
+  const farScale = useTransform(scrollYProgress, [0, 1], [1, 6]);
+  const scales = [
+    centerScale,
+    nearScale,
+    farScale,
+    nearScale,
+    farScale,
+    nearScale,
+  ];
   const textOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
 
   if (reduce) {
@@ -245,7 +252,7 @@ export default function ZoomParallax() {
 
         <motion.div
           style={{ opacity: textOpacity }}
-          className="pointer-events-none absolute z-20 px-6 text-center"
+          className="pointer-events-none absolute z-40 px-6 text-center"
         >
           <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-green-bright">
             O que a gente entrega
@@ -262,15 +269,15 @@ export default function ZoomParallax() {
             sectionIsVisible && (!compactPlayback || index < 3);
 
           return (
-            <div
+            <motion.div
               key={tile.video}
-              className="absolute inset-0 z-10 flex items-center justify-center"
+              className="absolute inset-0 flex items-center justify-center will-change-transform"
+              style={{
+                scale: scales[index],
+                zIndex: tile.center ? 10 : 1,
+              }}
             >
-              <motion.div
-                style={{
-                  scale: scales[index],
-                  willChange: sectionIsVisible ? "transform" : "auto",
-                }}
+              <div
                 className={`relative ${tile.size} ${tile.pos} overflow-hidden rounded-2xl border border-line bg-surface-2`}
               >
                 <DeferredVideo
@@ -289,8 +296,8 @@ export default function ZoomParallax() {
                     }}
                   />
                 )}
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
           );
         })}
       </div>
