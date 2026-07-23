@@ -119,7 +119,7 @@ export default function Process() {
           <span className="h-px w-6 bg-green/60" aria-hidden />O processo
         </span>
         <h2 className="reveal max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3.4rem)] font-semibold leading-[1.06] tracking-tight text-text">
-          Do &ldquo;oi&rdquo; ao site no ar:{" "}
+          Colocamos seu site no ar:{" "}
           <span className="text-brand-gradient">como a gente trabalha.</span>
         </h2>
         <p className="reveal mt-5 max-w-2xl text-base leading-relaxed text-text-dim sm:text-lg" data-delay="100">

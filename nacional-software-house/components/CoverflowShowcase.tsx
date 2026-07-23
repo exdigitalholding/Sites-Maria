@@ -12,11 +12,50 @@ import {
   AnimatePresence,
   type MotionValue,
 } from "motion/react";
-import { projects } from "@/lib/site";
+import { team } from "@/lib/site";
 
-const N = projects.length;
+const N = team.length;
 const clamp = (v: number, min: number, max: number) =>
   Math.max(min, Math.min(max, v));
+
+// Visual compartilhado entre o coverflow 3D (desktop) e o slider (mobile).
+function CardFace({ i, member }: { i: number; member: (typeof team)[number] }) {
+  return (
+    <>
+      {/* Foto da pessoa. Enquanto `image` estiver vazio, mostra o placeholder. */}
+      {member.image ? (
+        <img
+          src={member.image}
+          alt={member.name}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      ) : (
+        <>
+          <div className={`absolute inset-0 bg-gradient-to-br ${member.tint} to-transparent`} />
+          <div className="pattern-dots absolute inset-0 opacity-40" />
+          <div className="absolute inset-0 grid place-items-center">
+            <span className="rounded-full border border-dashed border-line px-4 py-2 font-mono text-[10px] uppercase tracking-widest text-text-faint">
+              foto do time
+            </span>
+          </div>
+        </>
+      )}
+      {/* Sheen for glassy depth */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.07]" />
+      <div className="absolute inset-x-0 bottom-0 flex flex-col gap-4 bg-gradient-to-t from-ink via-ink/85 to-transparent p-8 pt-20">
+        <span className="font-mono text-[10px] uppercase tracking-wider text-green-bright">
+          {member.role}
+        </span>
+        <h3 className="font-display text-lg font-semibold tracking-tight text-text sm:text-xl">
+          {member.name}
+        </h3>
+      </div>
+      <span className="absolute right-5 top-5 font-mono text-xs text-text-faint">
+        {String(i + 1).padStart(2, "0")}
+      </span>
+    </>
+  );
+}
 
 function Card({
   i,
@@ -24,14 +63,14 @@ function Card({
   cardW,
   cardH,
   spacing,
-  project,
+  member,
 }: {
   i: number;
   pos: MotionValue<number>;
   cardW: number;
   cardH: number;
   spacing: number;
-  project: (typeof projects)[number];
+  member: (typeof team)[number];
 }) {
   const x = useTransform(pos, (p) => (i - p) * spacing);
   const rotateY = useTransform(pos, (p) => clamp(-(i - p) * 38, -52, 52));
@@ -61,27 +100,7 @@ function Card({
       }}
       className="absolute left-1/2 top-1/2 overflow-hidden rounded-[1.75rem] border border-line bg-surface shadow-[0_40px_120px_-30px_rgba(0,0,0,0.9)]"
     >
-      {/* PLACEHOLDER: print/mockup real do projeto */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${project.tint} to-transparent`} />
-      <div className="pattern-dots absolute inset-0 opacity-40" />
-      <div className="absolute inset-0 grid place-items-center">
-        <span className="rounded-full border border-dashed border-line px-4 py-2 font-mono text-[10px] uppercase tracking-widest text-text-faint">
-          imagem do projeto
-        </span>
-      </div>
-      {/* Sheen for glassy depth */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.07]" />
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink via-ink/70 to-transparent p-6 pt-14">
-        <span className="font-mono text-[10px] uppercase tracking-wider text-green-bright">
-          {project.tag}
-        </span>
-        <h3 className="mt-2 font-display text-lg font-semibold tracking-tight text-text sm:text-xl">
-          {project.title}
-        </h3>
-      </div>
-      <span className="absolute right-5 top-5 font-mono text-xs text-text-faint">
-        0{i + 1}
-      </span>
+      <CardFace i={i} member={member} />
     </motion.article>
   );
 }
@@ -93,6 +112,16 @@ export default function CoverflowShowcase() {
 
   const [dims, setDims] = useState({ w: 0, cardW: 0, cardH: 0, spacing: 0 });
   const [active, setActive] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // No mobile a section vira um slider horizontal simples (sem o coverflow 3D).
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   // Measure the stage to size cards responsively
   useEffect(() => {
@@ -136,17 +165,22 @@ export default function CoverflowShowcase() {
   // Reduced motion: simple, no 3D
   if (reduce) {
     return (
-      <section id="projetos" className="border-b border-line bg-ink px-5 py-20 sm:px-8">
+      <section id="time" className="border-b border-line bg-ink px-5 py-20 sm:px-8">
+        <span className="mb-4 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-green-bright">
+          <span className="h-px w-6 bg-green/60" aria-hidden />
+          Quem constrói
+        </span>
         <h2 className="mb-10 font-display text-3xl font-semibold tracking-tight text-text">
-          Ideias que viraram <span className="text-brand-gradient">produto.</span>
+          Conheça nossa <span className="text-brand-gradient">equipe.</span>
         </h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((p) => (
-            <div key={p.title} className="rounded-2xl border border-line bg-surface p-6">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {team.map((m) => (
+            <div key={m.name} className="flex flex-col gap-4 rounded-2xl border border-line bg-surface p-8">
               <span className="font-mono text-[10px] uppercase tracking-wider text-green-bright">
-                {p.tag}
+                {m.role}
               </span>
-              <h3 className="mt-2 font-display text-lg font-semibold text-text">{p.title}</h3>
+              <h3 className="font-display text-lg font-semibold text-text">{m.name}</h3>
+              {m.focus && <p className="text-sm leading-relaxed text-text-dim">{m.focus}</p>}
             </div>
           ))}
         </div>
@@ -154,18 +188,54 @@ export default function CoverflowShowcase() {
     );
   }
 
+  // Mobile: slider horizontal com scroll-snap (sem o coverflow 3D)
+  if (isMobile) {
+    return (
+      <section id="time" className="border-b border-line bg-ink py-20">
+        <div className="px-5">
+          <span className="mb-4 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-green-bright">
+            <span className="h-px w-6 bg-green/60" aria-hidden />
+            Quem constrói
+          </span>
+          <h2 className="font-display text-[clamp(1.9rem,7vw,2.6rem)] font-semibold leading-[1.08] tracking-tight text-text">
+            Conheça nossa <span className="text-brand-gradient">equipe.</span>
+          </h2>
+        </div>
+
+        <div className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {team.map((m, i) => (
+            <article
+              key={m.name}
+              className="relative aspect-[3/4] w-[78vw] max-w-[320px] shrink-0 snap-center overflow-hidden rounded-[1.75rem] border border-line bg-surface shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)]"
+            >
+              <CardFace i={i} member={m} />
+            </article>
+          ))}
+        </div>
+
+        <p className="px-5 font-mono text-[10px] uppercase tracking-[0.2em] text-text-faint">
+          Arraste para o lado
+        </p>
+      </section>
+    );
+  }
+
   return (
     <section
       ref={wrap}
-      id="projetos"
+      id="time"
       className="relative border-b border-line bg-ink"
       style={{ height: "340vh" }}
     >
       <div className="sticky top-0 flex h-[100dvh] flex-col overflow-hidden">
         {/* Heading */}
         <div className="mx-auto w-full max-w-[1400px] px-5 pt-24 sm:px-8 sm:pt-28">
+          <span className="mb-4 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-green-bright">
+            <span className="h-px w-6 bg-green/60" aria-hidden />
+            Quem constrói
+          </span>
           <h2 className="font-display text-[clamp(1.8rem,4vw,3rem)] font-semibold leading-[1.08] tracking-tight text-text">
-            Ideias que viraram <span className="text-brand-gradient">produto.</span>
+            Conheça nossa <span className="text-brand-gradient">equipe.</span>
           </h2>
         </div>
 
@@ -182,15 +252,15 @@ export default function CoverflowShowcase() {
               style={{ rotateX: tiltX, rotateY: tiltY, transformStyle: "preserve-3d" }}
               className="absolute inset-0"
             >
-              {projects.map((p, i) => (
+              {team.map((m, i) => (
                 <Card
-                  key={p.title}
+                  key={m.name}
                   i={i}
                   pos={pos}
                   cardW={dims.cardW}
                   cardH={dims.cardH}
                   spacing={dims.spacing}
-                  project={p}
+                  member={m}
                 />
               ))}
             </motion.div>
@@ -213,12 +283,12 @@ export default function CoverflowShowcase() {
                 className="font-mono text-[11px] uppercase tracking-[0.2em] text-text-dim"
               >
                 {String(active + 1).padStart(2, "0")} / {String(N).padStart(2, "0")} ·{" "}
-                {projects[active].tag}
+                {team[active].role}
               </motion.span>
             </AnimatePresence>
           </div>
           <div className="flex items-center gap-2">
-            {projects.map((_, i) => (
+            {team.map((_, i) => (
               <span
                 key={i}
                 className={`h-1.5 rounded-full transition-all duration-300 ${

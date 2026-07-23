@@ -9,6 +9,10 @@ export default function Stats() {
   return (
     <section className="relative border-b border-line bg-ink py-20 sm:py-24">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
+        <span className="reveal mb-4 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-green-bright">
+          <span className="h-px w-6 bg-green/60" aria-hidden />
+          Prazos
+        </span>
         <h2 className="reveal max-w-2xl font-display text-[clamp(1.6rem,3.4vw,2.6rem)] font-semibold leading-[1.1] tracking-tight text-text">
           A sua ideia no ar em semanas,{" "}
           <span className="text-brand-gradient">não em meses.</span>

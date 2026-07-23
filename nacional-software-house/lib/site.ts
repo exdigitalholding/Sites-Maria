@@ -65,12 +65,74 @@ export const capabilities = [
   },
 ] as const;
 
+// Usado pelas variantes alternativas do showcase (rota /[variant]).
 export const projects = [
   { title: "Landing de alta conversão", tag: "Landing Page", tint: "from-green/20" },
   { title: "Painel SaaS sob medida", tag: "Plataforma", tint: "from-gold/20" },
   { title: "Site institucional premium", tag: "Institucional", tint: "from-green/15" },
   { title: "Automação de atendimento", tag: "IA aplicada", tint: "from-gold/15" },
   { title: "Portal com área de login", tag: "Sistema", tint: "from-green/20" },
+] as const;
+
+// Time atual. Os `role` abaixo são placeholders (ajuste para a função real de
+// cada pessoa). A foto entra no card do CoverflowShowcase (hoje placeholder).
+export const team = [
+  {
+    name: "Maria Eduarda",
+    role: "Equipe Nacional",
+    focus: "",
+    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    tint: "from-gold/20",
+  },
+  {
+    name: "João Stel",
+    role: "Equipe Nacional",
+    focus: "",
+    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    tint: "from-green/20",
+  },
+  {
+    name: "Gabriel A.",
+    role: "Equipe Nacional",
+    focus: "",
+    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    tint: "from-green/15",
+  },
+  {
+    name: "Victor Ogawa",
+    role: "Equipe Nacional",
+    focus: "",
+    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    tint: "from-gold/15",
+  },
+  {
+    name: "Maycon Vasconcellos",
+    role: "Equipe Nacional",
+    focus: "",
+    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    tint: "from-green/20",
+  },
+  {
+    name: "Alex Marin",
+    role: "Equipe Nacional",
+    focus: "",
+    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    tint: "from-gold/20",
+  },
+  {
+    name: "Mateus Arceno",
+    role: "Equipe Nacional",
+    focus: "",
+    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    tint: "from-green/15",
+  },
+  {
+    name: "Otto Tomás",
+    role: "Equipe Nacional",
+    focus: "",
+    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    tint: "from-gold/15",
+  },
 ] as const;
 
 export const differentials = [

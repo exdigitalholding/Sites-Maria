@@ -1,6 +1,27 @@
-import { Check } from "lucide-react";
-import SectionHeading from "./SectionHeading";
-import { pricing, whatsappHref, wa } from "@/lib/site";
+import { ArrowUpRight } from "lucide-react";
+import PriceCountdown from "./PriceCountdown";
+import { site, whatsappHref, wa } from "@/lib/site";
+
+const steps = [
+  {
+    k: "01",
+    title: "Parte de R$ 3.500",
+    body: `O piso de qualquer projeto, parcelável em ${site.installments} sem juros. Nada começa abaixo disso.`,
+    highlight: true,
+  },
+  {
+    k: "02",
+    title: "A gente calcula o escopo",
+    body: "Páginas, integrações e complexidade viram um orçamento sob medida, item por item.",
+    highlight: false,
+  },
+  {
+    k: "03",
+    title: "Você aprova antes de começar",
+    body: "Recebe o número fechado, com tudo detalhado. Aceita e a gente começa, ou ajusta o escopo junto.",
+    highlight: false,
+  },
+];
 
 export default function Pricing() {
   return (
@@ -9,75 +30,82 @@ export default function Pricing() {
       className="relative border-b border-line bg-ink-2 py-24 sm:py-32"
     >
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
-        <SectionHeading
-          title="Investimento claro,"
-          accent={"sem “depende” solto."}
-          intro="O valor acompanha a complexidade. Você sempre sabe o número antes de assinar."
-        />
+        <div className="reveal mx-auto max-w-3xl text-center">
+          <span className="mb-4 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-green-bright">
+            <span className="h-px w-6 bg-green/60" aria-hidden />
+            Investimento
+          </span>
+          <h2 className="font-display text-[clamp(1.9rem,4.2vw,3.4rem)] font-semibold leading-[1.06] tracking-tight text-text">
+            <span className="block">Todo projeto começa em</span>
+            <span className="mt-1 block">
+              <PriceCountdown />
+            </span>
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-text-dim sm:text-lg">
+            Esse é o piso, parcelável em {site.installments}. Daí pra cima o valor
+            é sob medida pela complexidade, e você aprova o número fechado antes
+            de qualquer linha de código. Nada de “depende” solto.
+          </p>
+        </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-3">
-          {pricing.map((plan) => (
+        <div className="relative mt-14 grid gap-5 lg:grid-cols-3">
+          {/* linha conectora entre os passos */}
+          <div
+            className="pointer-events-none absolute left-0 right-0 top-[54px] hidden h-px bg-gradient-to-r from-transparent via-green/40 to-transparent lg:block"
+            aria-hidden
+          />
+
+          {steps.map((s, i) => (
             <div
-              key={plan.name}
-              className={`reveal relative flex flex-col rounded-3xl border p-8 ${
-                plan.highlight
-                  ? "border-green/50 bg-gradient-to-b from-green/[0.08] to-surface"
-                  : "border-line bg-surface"
+              key={s.k}
+              className={`reveal relative rounded-3xl border bg-surface p-8 ${
+                s.highlight ? "border-green/40" : "border-line"
               }`}
+              data-delay={i * 100}
             >
-              {plan.highlight && (
-                <span className="absolute right-6 top-6 rounded-full bg-green px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-[#04120b]">
-                  Mais procurado
-                </span>
-              )}
-              <h3 className="font-display text-lg font-semibold tracking-tight text-text">
-                {plan.name}
-              </h3>
-              <p className="mt-1 text-sm text-text-dim">{plan.for}</p>
-
-              <div className="mt-6 flex items-baseline gap-2">
-                <span className="font-display text-4xl font-semibold tracking-tight text-text">
-                  {plan.price}
-                </span>
-              </div>
-              <span className="mt-1 font-mono text-xs text-text-faint">
-                {plan.note}
+              <span
+                className={`relative z-10 grid size-11 place-items-center rounded-full font-mono text-sm font-semibold ${
+                  s.highlight
+                    ? "bg-green text-[#04120b]"
+                    : "border border-line bg-ink text-green-bright"
+                }`}
+              >
+                {s.k}
               </span>
-
-              <ul className="mt-7 flex flex-col gap-3">
-                {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2.5 text-sm text-text-dim">
-                    <Check
-                      strokeWidth={3}
-                      className="mt-0.5 shrink-0 text-green"
-                    />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-8 pt-2">
-                <a
-                  href={whatsappHref(wa.proposta)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-colors ${
-                    plan.highlight
-                      ? "bg-green text-[#04120b] hover:bg-green-bright"
-                      : "border border-line text-text hover:border-green/50 hover:text-green-bright"
-                  }`}
-                >
-                  Tirar a ideia do papel
-                </a>
-              </div>
+              <h3 className="mt-6 font-display text-xl font-semibold tracking-tight text-text">
+                {s.highlight ? (
+                  <>
+                    Parte de{" "}
+                    <span className="text-brand-gradient">R$ 3.500</span>
+                  </>
+                ) : (
+                  s.title
+                )}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-text-dim">
+                {s.body}
+              </p>
             </div>
           ))}
         </div>
 
-        <p className="reveal mx-auto mt-10 max-w-2xl text-center text-sm text-text-faint">
-          Nada de custo escondido. Você aprova o valor na proposta antes de
-          qualquer código ser escrito.
-        </p>
+        <div className="reveal mt-12 flex flex-col items-center gap-4" data-delay="150">
+          <a
+            href={whatsappHref(wa.proposta)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-green px-8 py-4 text-sm font-semibold text-[#04120b] shadow-[0_18px_50px_-14px_rgba(18,183,106,0.7)] transition-colors duration-300 hover:bg-green-bright"
+          >
+            Quero meu orçamento
+            <ArrowUpRight
+              strokeWidth={3}
+              className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
+          </a>
+          <span className="font-mono text-xs text-text-faint">
+            Orçamento sem compromisso. Sem custo escondido, sem letra miúda.
+          </span>
+        </div>
       </div>
     </section>
   );
