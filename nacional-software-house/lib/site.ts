@@ -81,56 +81,56 @@ export const team = [
     name: "Maria Eduarda",
     role: "Equipe Nacional",
     focus: "",
-    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    image: "/nosso-time/Maria.jpg",
     tint: "from-gold/20",
   },
   {
     name: "João Stel",
     role: "Equipe Nacional",
     focus: "",
-    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    image: "/nosso-time/joao.jpg",
     tint: "from-green/20",
   },
   {
     name: "Gabriel A.",
     role: "Equipe Nacional",
     focus: "",
-    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    image: "/nosso-time/gabriel.jpg",
     tint: "from-green/15",
   },
   {
     name: "Victor Ogawa",
     role: "Equipe Nacional",
     focus: "",
-    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    image: "/nosso-time/ogawa.jpg",
     tint: "from-gold/15",
   },
   {
     name: "Maycon Vasconcellos",
     role: "Equipe Nacional",
     focus: "",
-    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    image: "/nosso-time/maycon.jpg",
     tint: "from-green/20",
   },
   {
     name: "Alex Marin",
     role: "Equipe Nacional",
     focus: "",
-    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    image: "/nosso-time/alex.jpg",
     tint: "from-gold/20",
   },
   {
     name: "Mateus Arceno",
     role: "Equipe Nacional",
     focus: "",
-    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    image: "/nosso-time/mateus.jpg",
     tint: "from-green/15",
   },
   {
     name: "Otto Tomás",
     role: "Equipe Nacional",
     focus: "",
-    image: "", // TODO: caminho da foto, ex.: "/time/nome.jpg"
+    image: "/nosso-time/otto.jpg",
     tint: "from-gold/15",
   },
 ] as const;

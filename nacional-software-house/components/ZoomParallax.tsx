@@ -162,7 +162,7 @@ export default function ZoomParallax() {
                 loop
                 muted
                 playsInline
-                preload="auto"
+                preload="metadata"
                 aria-label={t.label}
                 className="absolute inset-0 h-full w-full object-cover"
               />

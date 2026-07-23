@@ -27,11 +27,13 @@ function CardFace({ i, member }: { i: number; member: (typeof team)[number] }) {
         <img
           src={member.image}
           alt={member.name}
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover"
         />
       ) : (
         <>
-          <div className={`absolute inset-0 bg-gradient-to-br ${member.tint} to-transparent`} />
+          <div className={`absolute inset-0 bg-gradient-to-br ${(member as any).tint || "from-gold/20"} to-transparent`} />
           <div className="pattern-dots absolute inset-0 opacity-40" />
           <div className="absolute inset-0 grid place-items-center">
             <span className="rounded-full border border-dashed border-line px-4 py-2 font-mono text-[10px] uppercase tracking-widest text-text-faint">
